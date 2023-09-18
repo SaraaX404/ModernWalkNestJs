@@ -21,6 +21,10 @@ export class UsersService {
         return this.prisma.user.findUnique({ where: { id: Number(id) } })
     }
 
+    async findOne(username:string){
+        return this.prisma.user.findFirst({where:{email:username}})
+    }
+
     async create(data:User){
 
         const saltOrRounds = 10;

@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+ import {Body, Controller, Get, Param, Patch, Post, Request, UseGuards} from '@nestjs/common';
 import { UsersService } from '../service/users.service';
 import { User } from '@prisma/client';
+ import {LocalStrategy} from "../../auth/local.strategy";
+ import {LocalAuthGuard} from "../../auth/local-auth.guard";
 
 type UserUpdate = {
     firstName?: string;
@@ -15,6 +17,12 @@ export class UsersController {
     @Get()
     getAll():Promise<User[]>{
         return this.usersService.getAll()
+    }
+
+    @UseGuards(LocalAuthGuard)
+    @Post('/login')
+    login(@Request() req){
+        return {meg:"Logged in"}
     }
 
     @Get('id')
@@ -32,5 +40,7 @@ export class UsersController {
     update(@Body() userData:UserUpdate, @Param('id') id:number){
         return this.usersService.update(userData, id)
     }
+
+
 
 }
