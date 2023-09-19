@@ -3,6 +3,7 @@ import { UsersService } from '../service/users.service';
 import { User } from '@prisma/client';
  import {LocalStrategy} from "../../auth/local.strategy";
  import {LocalAuthGuard} from "../../auth/local-auth.guard";
+ import {AuthService} from "../../auth/auth.service";
 
 type UserUpdate = {
     firstName?: string;
@@ -12,7 +13,7 @@ type UserUpdate = {
 
 @Controller('users')
 export class UsersController {
-    constructor(private readonly usersService:UsersService){}
+    constructor(private readonly usersService:UsersService, private readonly authService:AuthService){}
 
     @Get()
     getAll():Promise<User[]>{
@@ -22,7 +23,8 @@ export class UsersController {
     @UseGuards(LocalAuthGuard)
     @Post('/login')
     login(@Request() req){
-        return {meg:"Logged in"}
+
+        return this.authService.login(req.user)
     }
 
     @Get('id')

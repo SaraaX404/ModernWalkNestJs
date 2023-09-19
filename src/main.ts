@@ -14,17 +14,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  app.use(
-      session({
-        secret:'Sample Session',
-        resave:false,
-        saveUninitialized:false,
-        cookie:{maxAge:3600000}
-      })
-  )
 
-  app.use(passport.initialize())
-  app.use(passport.session())
 
   await app.listen(3000);
 }

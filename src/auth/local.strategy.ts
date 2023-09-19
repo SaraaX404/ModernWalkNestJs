@@ -4,6 +4,7 @@ import {AuthService} from "./auth.service";
 import {Injectable, UnauthorizedException} from "@nestjs/common";
 
 
+// @ts-ignore
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy){
     constructor(private authService:AuthService) {
@@ -17,6 +18,7 @@ export class LocalStrategy extends PassportStrategy(Strategy){
         const user = await this.authService.validatePassword(username, password)
 
         if(user){
+            console.log(user)
             return user
         }else{
             throw new UnauthorizedException()
