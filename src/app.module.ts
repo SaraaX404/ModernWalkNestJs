@@ -5,6 +5,9 @@ import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import {RolesGuard} from "./auth/roles.guard";
+import {APP_GUARD} from "@nestjs/core";
+import {LocalAuthGuard} from "./auth/local-auth.guard";
 
 @Module({
   imports: [ProductsModule, CategoriesModule, UsersModule, AuthModule],
