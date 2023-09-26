@@ -5,6 +5,7 @@ import {PassportModule} from "@nestjs/passport";
 import {UsersModule} from "../users/users.module";
 import {SessionSerializer} from "./session.serializer";
 
+// @ts-ignore
 @Module({
   providers: [AuthService,LocalStrategy, SessionSerializer],
   imports:[PassportModule.register({session:true}),UsersModule]

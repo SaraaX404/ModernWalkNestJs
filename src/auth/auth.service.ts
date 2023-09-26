@@ -2,6 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {UsersService} from "../users/service/users.service";
 import * as bcrypt from 'bcrypt'
 
+// @ts-ignore
 @Injectable()
 export class AuthService {
     constructor(private authService:UsersService) {
